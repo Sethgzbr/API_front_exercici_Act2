@@ -108,7 +108,7 @@ def read_all_with_details():
         conn = db_client()
         cur = conn.cursor()
         query = """
-        SELECT a.*, aula.DescAula, aula.Edifici, aula.Pis
+        SELECT a.NomAlumne, a.Curs, a.Cicle, a.Grup, aula.DescAula
         FROM alumne a
         JOIN aula ON a.IdAula = aula.IdAula;
         """ 
