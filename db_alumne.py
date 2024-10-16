@@ -103,19 +103,40 @@ def delete(IdAlumne):
 
     return student_id
 
-def readAll():
+def read_all_with_details():
     try:
         conn = db_client()
         cur = conn.cursor()
-        cur.execute("SELECT a.IdAlumne, a.IdAula, a.NomAlumne, a.Cicle, a.curs, a.grup, au.DescAula, au.Edifici, au.Pis FROM alumne a JOIN aula au ON a.IdAula = au.IdAula;")
-    
-        students = cur.fetchall()
-    
+        query = """
+        SELECT a.*, aula.DescAula, aula.Edifici, aula.Pis
+        FROM alumne a
+        JOIN aula ON a.IdAula = aula.IdAula;
+        """ 
+        cur.execute(query)
+        result = cur.fetchall()
+
+        alumne_list = []
+        for row in result:
+            alumne_list.append({
+                "IdAlumne": row[0],
+                "IdAula": row[1],
+                "NomAlumne": row[2],
+                "Cicle": row[3],
+                "Curs": row[4],
+                "Grup": row[5],
+                "CreatedAt": row[6],
+                "UpdatedAt": row[7],
+                "DescAula": row[8],
+                "Edifici": row[9],
+                "Pis": row[10]
+            })
+
+        return alumne_list
+
     except Exception as e:
-        print("ERROR", e)
-        return {"status": -1, "message": f"Error de connexió:{e}" }
-    
+        print(f"Error en la función read_all_with_details: {e}")
+        return {"status": -1, "message": f"Error de conexión: {e}"}
+
     finally:
         conn.close()
-    
-    return students
+

@@ -84,7 +84,6 @@ async def delete_student(IdAlumne: int):
         "id student": l_student_id,
     }
 
-@app.get("/list_all",response_model=List[dict])
-def read_alumneAll():
-
-        return alumne.all_schema(db_alumne.readAll())
+@app.get("/alumne/listAll")
+def read_all_alumne():
+    return db_alumne.read_all_with_details()
