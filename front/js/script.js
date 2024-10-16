@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Cridem a l'endpoint de l'API fent un fetch
-    ______________________________________________
+    fetch("/alumne/listAll")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error a la resposta del servidor");
@@ -20,9 +20,22 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.appendChild(nomAluCell);
 
                 // Repetir per tots els altres camps restants que retorna l'endpoint
-                _____________________________________________
+                const cicleAluCell = document.createElement("td");
+                cicleAluCell.textContent = alumne.Cicle;
+                row.appendChild(cicleAluCell);
+
+                const cursAluCell = document.createElement("td");
+                cursAluCell.textContent = alumne.Curs;
+                row.appendChild(cursAluCell);
+
+                const grupAluCell = document.createElement("td");
+                grupAluCell.textContent = alumne.Grup;
+                row.appendChild(grupAluCell);
 
                 
+                const descAluCell = document.createElement("td");
+                descAluCell.textContent = alumne.DescAula;
+                row.appendChild(descAluCell);
 
                 alumnesTableBody.appendChild(row);
             });
