@@ -1,11 +1,21 @@
 from typing import List, Union
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 import alumne
 import db_alumne
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 class student(BaseModel):
     IdAlumne: int
@@ -15,7 +25,7 @@ class student(BaseModel):
     curs: int
     grup: str
 
-class studentAll(BaseModel):
+class tablaAlumne(BaseModel):
     IdAlumne: int
     IdAula: int
     nomAlumne:str
@@ -30,7 +40,7 @@ class studentAll(BaseModel):
 def read_root():
     return {"Students API"}
 
-@app.get("/alumne", response_model=List[dict])
+@app.get("/alumne", “response_model=List[tablaAlumne])
 def read_alumne():
 
     return alumne.alumne_schema(db_alumne.read())
