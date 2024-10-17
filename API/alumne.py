@@ -1,7 +1,7 @@
-def estudiant_schema(student) -> dict:
+def estudiant_schema(fetchAlumnes) -> dict:
      return {"NomAlumne": fetchAlumnes[0],
-            "Cicle": fetchAlumnes[1],
-            "Curs": fetchAlumnes[2],
+            "Curs": fetchAlumnes[1],
+            "Cicle": fetchAlumnes[2],
             "Grup": fetchAlumnes[3],
             "DescAula": fetchAlumnes[4]
             }

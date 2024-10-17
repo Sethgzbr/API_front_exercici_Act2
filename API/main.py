@@ -26,21 +26,17 @@ class student(BaseModel):
     grup: str
 
 class tablaAlumne(BaseModel):
-    IdAlumne: int
-    IdAula: int
-    nomAlumne:str
-    cicle: str
-    curs: int
-    grup: str
-    descAula: int
-    pis: int
-    edifici: int
+    NomAlumne:str
+    Cicle: str
+    Curs: int
+    Grup: str
+    DescAula: int
 
 @app.get("/")
 def read_root():
     return {"Students API"}
 
-@app.get("/alumne", “response_model=List[tablaAlumne])
+@app.get("/alumne", response_model=List[tablaAlumne])
 def read_alumne():
 
     return alumne.alumne_schema(db_alumne.read())

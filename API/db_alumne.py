@@ -4,7 +4,7 @@ def read():
     try:
         conn = db_client()
         cur = conn.cursor()
-        cur.execute("select * from alumne")
+        cur.execute("SELECT a.NomAlumne, a.Curs, a.Cicle, a.Grup, aula.DescAula FROM alumne a JOIN aula ON a.IdAula = aula.IdAula;")
     
         students = cur.fetchall()
     
